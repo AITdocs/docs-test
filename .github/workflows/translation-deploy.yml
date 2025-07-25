@@ -18,6 +18,8 @@ jobs:
         uses: tgymnich/fork-sync@v1.2.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          head: main
+          base: main
           pr_title: "自动同步上游代码"
           pr_message: "此 PR 由 GitHub Action 自动生成，用于同步上游代码"
 
