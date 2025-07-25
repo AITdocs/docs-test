@@ -22,21 +22,19 @@ jobs:
           base: main
           head: main
 
-  # 安装 python 以及 uv
-  install:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-      - uses: yezz123/setup-uv@v4
-      - run: uv --version
-
   translate:
     needs: sync
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+
+      - name: Setup uv
+        uses: yezz123/setup-uv@v4
+      - run: uv --version
 
       - name: Clone translation tool (if needed)
         run: |
@@ -51,6 +49,7 @@ jobs:
 
       - name: Run translation
         run: |
+          pwd
           uv --version
           uv sync --frozen
           uv run main.py -d ${{vars.DOCS_DIR}}  --incremental --auto-commit --auto-push
