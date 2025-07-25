@@ -62,5 +62,4 @@ jobs:
 
       - name: Run translation
         run: |
-          cd ~/aitdocs
-          uv run main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
+          uv run ~/aitdocs/main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
