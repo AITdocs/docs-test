@@ -1,0 +1,52 @@
+name: Sync, Translate and Deploy
+
+on:
+  schedule:
+    - cron: "0 * * * *"  # 每小时执行一次
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fork Sync
+        uses: tgymnich/fork-sync@v1.2.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "自动同步上游代码"
+          pr_message: "此 PR 由 GitHub Action 自动生成，用于同步上游代码"
+
+  translate:
+    needs: sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6.4.3
+        with:
+          version: latest
+          activate-environment: true  # 激活虚拟环境
+          working-directory: .  # 项目根目录
+
+      - name: Clone translation tool (if needed)
+        run: |
+          git clone $AITDOCS_REPO
+
+      - name: Setup environment variables
+        run: |
+          echo "ALI_BASE_URL=$ALI_LLM_BASE_URL" > .env
+          echo "ALI_MODEL_NAME=$ALI_LLM_MODEL_NAME" >> .env
+          echo "ALI_API_KEY=${{secrets.ALI_LLM_API_KEY}}" >> .env
+
+      - name: Run translation
+        run: |
+          cd aitdocs
+          uv sync --frozen
+          uv run main.py -d $DOCS_DIR  --incremental --auto-commit --auto-push
