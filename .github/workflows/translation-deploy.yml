@@ -41,8 +41,6 @@ jobs:
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v6
-        with:
-          working-directory: ~/aitdocs
 
       - name: Setup environment variables
         run: |
@@ -64,13 +62,7 @@ jobs:
       - name: Run translation
         run: |
           DIR_PATH=$(realpath $GITHUB_WORKSPACE/${{vars.DOCS_DIR}})
-
           echo "pwd: $(pwd)"
           echo "DIR_PATH: ${DIR_PATH}"
-
           cd ~/aitdocs
-
-          echo "DIR_PATH: ${DIR_PATH}"
-          echo "pwd: $(pwd)"
-
-          # uv run main.py -d $DOC_PATH --incremental --auto-commit --auto-push
+          uv run main.py -d $DIR_PATH --incremental --auto-commit --auto-push
