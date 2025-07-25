@@ -63,10 +63,14 @@ jobs:
 
       - name: Run translation
         run: |
-          # uv run main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
-          # 定义变量=>DIR_PATH = pwd + vars.DOCS_DIR
-          DIR_PATH=$(pwd)/${{ vars.DOCS_DIR }}
+          DIR_PATH=$(realpath $GITHUB_WORKSPACE/${{vars.DOCS_DIR}})
+
+          echo "pwd: $(pwd)"
           echo "DIR_PATH: ${DIR_PATH}"
+
           cd ~/aitdocs
+
           echo "DIR_PATH: ${DIR_PATH}"
-          # uv run main.py -d $DIR_PATH --incremental --auto-commit --auto-push
+          echo "pwd: $(pwd)"
+
+          # uv run main.py -d $DOC_PATH --incremental --auto-commit --auto-push
