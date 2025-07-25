@@ -15,10 +15,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: TG908/fork-sync@v1.6.3
+      - uses: tgymnich/fork-sync@v2.0
         with:
-          head: main # fork 的上游仓库 branch
-          base: main # 本地仓库 branch
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          owner: AITdocs
+          base: main
+          head: main
 
   translate:
     needs: sync
