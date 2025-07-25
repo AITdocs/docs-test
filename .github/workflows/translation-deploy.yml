@@ -1,15 +1,15 @@
 name: Sync, Translate and Deploy
 
 on:
-  schedule:
+  #schedule:
     # 30 分钟执行一次
-    - cron: '0 0 * * *'
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    #- cron: '0 0 * * *'
+  #push:
+    #branches:
+      #- main
+  #pull_request:
+    #branches:
+      #- main
   workflow_dispatch: # on button click
 
 jobs:
