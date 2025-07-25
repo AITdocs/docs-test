@@ -3,9 +3,9 @@ name: Sync, Translate and Deploy
 on:
   schedule:
     - cron: '0 0 * * *'
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   pull_request:
     branches:
       - main
