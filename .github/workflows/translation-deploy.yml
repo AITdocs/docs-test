@@ -63,4 +63,8 @@ jobs:
 
       - name: Run translation
         run: |
-          uv run ~/aitdocs/main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
+          cd ~/aitdocs
+          # uv run main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
+          # 定义变量=>DIR_PATH = pwd + vars.DOCS_DIR
+          DIR_PATH=$(pwd)/${{ vars.DOCS_DIR }}
+          uv run main.py -d $DIR_PATH --incremental --auto-commit --auto-push
