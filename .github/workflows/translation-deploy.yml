@@ -49,6 +49,7 @@ jobs:
 
       - name: Run translation
         run: |
+          cd aitdocs
           pwd
           uv --version
           uv sync --frozen
