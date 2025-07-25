@@ -22,6 +22,15 @@ jobs:
           base: main
           head: main
 
+  # 安装 python 以及 uv
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - uses: yezz123/setup-uv@v4
+      - run: uv --version
+
   translate:
     needs: sync
     runs-on: ubuntu-latest
@@ -39,16 +48,9 @@ jobs:
           echo "ALI_BASE_URL=${{vars.ALI_LLM_BASE_URL}}" > .env
           echo "ALI_MODEL_NAME=${{vars.ALI_LLM_MODEL_NAME}}" >> .env
           echo "ALI_API_KEY=${{secrets.ALI_LLM_API_KEY}}" >> .env
-          ls
-
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v6.4.3
-        with:
-          version: latest
-          activate-environment: true # 激活虚拟环境
-          working-directory: ./aitdocs # 项目根目录
 
       - name: Run translation
         run: |
+          uv --version
           uv sync --frozen
           uv run main.py -d ${{vars.DOCS_DIR}}  --incremental --auto-commit --auto-push
