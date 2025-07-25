@@ -17,6 +17,7 @@ jobs:
     steps:
       - uses: tgymnich/fork-sync@v1.8
         with:
+          owner: wuxian-space
           base: main
           head: main
 
@@ -27,16 +28,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup uv
-        uses: astral-sh/setup-uv@v6.4.3
-        with:
-          version: latest
-          activate-environment: true  # 激活虚拟环境
-          working-directory: .  # 项目根目录
-
       - name: Clone translation tool (if needed)
         run: |
           git clone $AITDOCS_REPO
+          cd aitdocs
 
       - name: Setup environment variables
         run: |
@@ -44,8 +39,14 @@ jobs:
           echo "ALI_MODEL_NAME=$ALI_LLM_MODEL_NAME" >> .env
           echo "ALI_API_KEY=${{secrets.ALI_LLM_API_KEY}}" >> .env
 
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6.4.3
+        with:
+          version: latest
+          activate-environment: true  # 激活虚拟环境
+          working-directory: .  # 项目根目录
+
       - name: Run translation
         run: |
-          cd aitdocs
           uv sync --frozen
           uv run main.py -d $DOCS_DIR  --incremental --auto-commit --auto-push
