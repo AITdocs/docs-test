@@ -50,4 +50,4 @@ all embeddings up to limit starting at offset.
 
 **Returns**:
 
-- `GetResult` - A GetResult object containing the results.
+- `GetResult` - A GetResult object
