@@ -4,7 +4,7 @@ title: 集合
 
 # Python 集合
 
-> 此刻，其他阿开奥斯的王公们都酣睡整夜，唯有阿特柔斯之子阿伽门农心绪烦乱，难以入眠。就像赫拉的丈夫宙斯在天空闪动雷霆，预示着大雨倾盆、冰雹肆虐或雪花纷飞覆盖大地，又或作为战争即将爆发的征兆，同样地，阿伽门农长叹连连，内心震颤不安。当他望向特洛伊平原时，看到许多守夜的篝火在伊利翁城前燃烧，不禁为之惊叹…… -《伊利亚特》，第十卷
+> 此刻其他阿开亚的王子们都安然入睡，但阿特柔斯之子阿伽门农却辗转反侧，心烦意乱，难以入眠。正如赫拉的丈夫宙斯在天空中闪烁雷霆，预示着暴雨、冰雹，或当雪花覆盖大地时的飞雪，又或作为战争即将爆发的征兆，同样，阿伽门农也发出一声声沉重的叹息，因为他的内心充满不安。当他望向特洛伊平原时，看到伊里翁城前燃起的无数篝火，不禁惊叹不已…… -《伊利亚特》，第10卷
 
 ```python
 class Collection(BaseModel)
@@ -26,7 +26,7 @@ def count() -> int
 
 ```python
 def get(ids: Optional[OneOrMany[ID]] = None,
-        """用于过滤嵌入向量的where条件"""
+        """应用于嵌入向量的where过滤条件"""
         where: Optional[Where] = None,
         limit: Optional[int] = None,
         offset: Optional[int] = None,
@@ -34,16 +34,16 @@ def get(ids: Optional[OneOrMany[ID]] = None,
         include: Include = ["metadatas", "documents"]) -> GetResult
 ```
 
-从数据存储中获取嵌入向量及其相关数据。如果没有提供 ids 或 where 条件，则返回从 offset 开始的最多 limit 个嵌入向量。
+从数据存储中获取嵌入向量及其相关数据。如果没有提供ids或where过滤条件，则返回从offset开始，最多limit条记录的所有嵌入向量。
 
 **参数**:
 
-- `ids` - 要获取的嵌入向量的 ids。可选。
-- `where` - 一个 Where 类型的字典，用于按元数据过滤结果。例如 `{$and: [{"color" : "red"}, {"price": 4.20}]}`。可选。
+- `ids` - 要获取的嵌入向量的ID。可选。
+- `where` - 用于过滤结果的Where类型字典。例如：`{$and: [{"color" : "red"}, {"price": 4.20}]}`。可选。
 - `limit` - 返回的文档数量。可选。
-- `offset` - 开始返回结果的偏移量。与 limit 一起用于分页查询。可选。
-- `where_document` - 一个 WhereDocument 类型的字典，用于按文档内容进行过滤。例如 `{"$contains" : "hello"}`。可选。
-- `include` - 一个列表，指定结果中包含的内容。可以包含 `"embeddings"`、`"metadatas"`、`"documents"`。ids 始终包含在内。默认为 `["metadatas", "documents"]`。可选。
+- `offset` - 开始返回结果的偏移量。与limit一起用于分页查询。可选。
+- `where_document` - 用于根据文档内容进行过滤的WhereDocument类型字典。例如：`{"$contains" : "hello"}`。可选。
+- `include` - 指定结果中包含的内容。可以包含`"embeddings"`、`"metadatas"`、`"documents"`。ID始终会包含在内。默认值为`["metadatas", "documents"]`。可选。
 
 **返回值**：
 
