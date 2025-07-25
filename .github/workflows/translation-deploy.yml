@@ -34,14 +34,15 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
 
-      - name: Setup uv
-        uses: yezz123/setup-uv@v4
-      - run: uv --version
-
       - name: Clone translation tool (if needed)
         run: |
           cd ~
           git clone ${{vars.AITDOCS_REPO}}
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          working-directory: ~/aitdocs
 
       - name: Setup environment variables
         run: |
