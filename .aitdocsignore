@@ -13,3 +13,5 @@ README_old.md
 guides/build/
 reference/
 *_zh.md
+.git
+.github
