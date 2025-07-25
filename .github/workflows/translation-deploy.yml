@@ -38,11 +38,6 @@ jobs:
         uses: yezz123/setup-uv@v4
       - run: uv --version
 
-      - name: Configure Git
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: Clone translation tool (if needed)
         run: |
           cd ~
@@ -55,7 +50,17 @@ jobs:
           echo "ALI_MODEL_NAME=${{vars.ALI_LLM_MODEL_NAME}}" >> .env
           echo "ALI_API_KEY=${{secrets.ALI_LLM_API_KEY}}" >> .env
 
+      - name: Install dependencies
+        run: |
+          cd ~/aitdocs
+          uv sync --frozen
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Run translation
         run: |
-          pwd
-          uv run ~/aitdocs/main.py -d . --incremental --auto-commit --auto-push
+          cd ~/aitdocs
+          uv run main.py -d ${{vars.DOCS_DIR}} --incremental --auto-commit --auto-push
