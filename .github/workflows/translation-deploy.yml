@@ -2,26 +2,24 @@ name: Sync, Translate and Deploy
 
 on:
   schedule:
-    - cron: "0 * * * *"  # 每小时执行一次
+    - cron: '*/30 * * * *' # every 30 minutes
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+  workflow_dispatch: # on button click
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Fork Sync
-        uses: tgymnich/fork-sync@v1.2.1
+      - uses: tgymnich/fork-sync@v1.8
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          head: main
-          base: main
-          pr_title: "自动同步上游代码"
-          pr_message: "此 PR 由 GitHub Action 自动生成，用于同步上游代码"
+          owner: llvm
+          base: master
+          head: master
 
   translate:
     needs: sync
