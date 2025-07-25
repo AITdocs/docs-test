@@ -2,7 +2,8 @@ name: Sync, Translate and Deploy
 
 on:
   schedule:
-    - cron: '0 0 * * *' # daily at midnight instead of every 30 minutes
+    # 30 分钟执行一次
+    - cron: '0 0 * * *'
   push:
     branches:
       - main
@@ -29,7 +30,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.FORK_SYNC_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v4
