@@ -15,12 +15,10 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: tgymnich/fork-sync@v2.0
+      - uses: TG908/fork-sync@v1.6.3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          owner: wuxian-space
-          base: main
-          head: main
+          head: main # fork 的上游仓库 branch
+          base: main # 本地仓库 branch
 
   translate:
     needs: sync
@@ -44,8 +42,8 @@ jobs:
         uses: astral-sh/setup-uv@v6.4.3
         with:
           version: latest
-          activate-environment: true  # 激活虚拟环境
-          working-directory: .  # 项目根目录
+          activate-environment: true # 激活虚拟环境
+          working-directory: . # 项目根目录
 
       - name: Run translation
         run: |
