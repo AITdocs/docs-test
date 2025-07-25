@@ -1,29 +1,29 @@
-# 与人工智能共同构建
+# 与AI共同构建
 
-人工智能是一种新型的编程基本要素。大语言模型（LLM）让我们编写出能够以**常识性**的方式处理**非结构化**信息的软件。
+AI是一种新型的编程原语。大语言模型（LLMs）让我们能够编写出可以以**常识性**方式处理**非结构化**信息的软件。
 
-试想一个任务：编写一个程序，从以下段落中提取出所有人名的列表：
+试想这样一个任务：编写一个程序，从下面这段文字中提取出所有人名的列表：
 
-> 现在其他的阿开亚王子们都整夜酣睡，但阿特柔斯之子阿伽门农却辗转反侧，难以入眠。正如赫拉美丽的丈夫主神宙斯以闪电预示着大雨、冰雹或雪花覆盖大地的降雪，又或是预示着战争饥饿的巨口即将张开，阿伽门农也发出一声声沉重的叹息，他的灵魂在胸中战栗不安。当他望向特洛伊平原时，对无数燃烧在伊利翁城墙外的篝火感到惊异…… ——《伊利亚特》，第十卷
+> 如今其他的希腊王子们都安然酣睡了一整夜，但阿伽门农却心绪不宁，难以入眠。就像赫拉的丈夫宙斯在天空中闪烁他的闪电，预示着倾盆大雨、冰雹或雪花使大地变白的积雪，又或是他要张开饥饿战争的巨口的征兆一样，阿伽门农也发出了一次次沉重的叹息，他的内心充满震颤。当他望向特洛伊平原时，看到伊利翁城前燃烧着无数警卫的篝火，不禁大为惊叹…… ——《伊利亚特》，第十卷
 
-对人类来说，提取人名轻而易举，但如果仅使用传统编程技术来做这件事则非常困难。编写一个能从任意段落中提取名字的通用程序则更加困难。
+对人类而言，提取名字轻而易举，但如果仅使用传统编程方法则非常困难。要编写一个能够从任意段落中提取名字的通用程序更是难上加难。
 
-然而，有了LLM，这个任务几乎变得微不足道。我们只需向LLM提供如下输入：
+然而，有了LLM（大语言模型），这项任务几乎变得微不足道。我们只需将以下输入提供给一个LLM：
 
-> 列出以下段落中出现的所有人名，用逗号分隔：现在其他的阿开亚王子们都整夜酣睡，但阿特柔斯之子阿伽门农却辗转反侧，难以入眠。正如赫拉美丽的丈夫主神宙斯以闪电预示着大雨、冰雹或雪花覆盖大地的降雪，又或是预示着战争饥饿的巨口即将张开，阿伽门农也发出一声声沉重的叹息，他的灵魂在胸中战栗不安。当他望向特洛伊平原时，对无数燃烧在伊利翁城墙外的篝火感到惊异…… ——《伊利亚特》，第十卷
+> 列出以下段落中出现的所有人名，用逗号分隔：如今其他的希腊王子们都安然酣睡了一整夜，但阿伽门农却心绪不宁，难以入眠。就像赫拉的丈夫宙斯在天空中闪烁他的闪电，预示着倾盆大雨、冰雹或雪花使大地变白的积雪，又或是他要张开饥饿战争的巨口的征兆一样，阿伽门农也发出了一次次沉重的叹息，他的内心充满震颤。当他望向特洛伊平原时，看到伊利翁城前燃烧着无数警卫的篝火，不禁大为惊叹…… ——《伊利亚特》，第十卷
 
-输出结果将正确无误：
+输出结果将会是正确的：
 
-> 阿伽门农，阿特柔斯，赫拉
+> 阿伽门农, 阿特柔斯, 赫拉
 
-将LLM集成到软件应用中，就如同调用API一样简单。尽管不同LLM之间的API具体实现可能有所不同，但大多数已经趋同于一些常见的模式：
+将LLM集成到软件应用中就像调用API一样简单。虽然不同LLM的API细节可能有所不同，但大多数都遵循一些通用的模式：
 
-* 调用 API 通常包括包含模型（`model`）标识符和 `messages` 列表等参数。
-* 每条 `message` 都包含一个 `role` 和 `content`。
-* `system` 角色可以看作是对模型的*指令*。
-* `user` 角色可以看作是需要处理的*数据*。
+* 对API的调用通常包括包含模型标识符 `model` 和消息列表 `messages` 的参数。
+* 每条 `message` 都有 `role` 和 `content` 两个属性。
+* `system` 角色可以视为对模型的*指令*。
+* `user` 角色可以视为需要处理的*数据*。
 
-例如，我们可以使用 AI 编写一个通用函数，从输入文本中提取人名。
+例如，我们可以使用AI编写一个通用函数，从输入文本中提取姓名。
 
 {% CustomTabs %}
 
@@ -101,7 +101,7 @@ client = anthropic.Anthropic(
 )
 
 def extract_names(text: str) -> list[str]:
-    system_prompt = "You are a name extractor. The user will give you text, and you must return a JSON array of names mentioned in the text. Do not include any explanation or formatting."
+    system_prompt = "You are a name extractor. The user will give you text, and you must return a JSON array of names mentioned in the text.不要包含任何解释或格式。"
 
     response = client.messages.create(
         model="claude-sonnet-4-20250514",
@@ -127,7 +127,7 @@ const anthropic = new Anthropic({
 
 export async function extractNames(text: string): Promise<string[]> {
     const systemPrompt =
-        'You are a name extractor. The user will give you text, and you must return a JSON array of names mentioned in the text. Do not include any explanation or formatting.';
+        'You are a name extractor. The user will give you text, and you must return a JSON array of names mentioned in the text.不要包含任何解释或格式。';
 
     const message = await anthropic.messages.create({
         model: 'claude-sonnet-4-20250514',
