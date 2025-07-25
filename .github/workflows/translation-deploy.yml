@@ -31,6 +31,7 @@ jobs:
 
       - name: Clone translation tool (if needed)
         run: |
+          ls
           git clone ${{vars.AITDOCS_REPO}}
           ls
           cd aitdocs
