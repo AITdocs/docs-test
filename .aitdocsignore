@@ -10,5 +10,5 @@ drafts/
 # 忽略特定文件
 README_old.md
 
-guides/
+guides/build/
 reference/
