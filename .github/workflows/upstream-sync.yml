@@ -1,0 +1,37 @@
+name: Sync Upstream Changes
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v2.0
+        with:
+          token: ${{ secrets.FORK_SYNC_TOKEN }}
+          base: base-main
+          head: main
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.FORK_SYNC_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge main to aitdocs
+        run: |
+          git checkout aitdocs || git checkout -b aitdocs
+          git merge main --allow-unrelated-histories -m "Merge main to aitdocs [run-translation-deploy-ci]"
+
+      - name: Push aitdocs branch
+        run: |
+          git push origin aitdocs
