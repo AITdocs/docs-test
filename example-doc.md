@@ -18,7 +18,6 @@ def count() -> int
 ```
 
 The total number of embeddings added to the database
-test.
 
 **Returns**:
 
