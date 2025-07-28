@@ -2,19 +2,19 @@
 
 ## 客户端 API
 
-Chroma 目前提供了一等的 Python 和 JavaScript 客户端支持。对于其他语言的客户端，请参考对应仓库的文档。
+Chroma 目前维护了官方的 Python 和 JavaScript 客户端。对于其他语言的客户端，请参考对应仓库的文档。
 
 `Client` - 是封装了与 Chroma DB 后端连接的对象。
 
-`Collection` - 是封装了一个集合的对象。
+`Collection` - 是封装了集合的对象。
 
 {% special_table %}
 {% /special_table %}
 
-|              | 客户端                | 集合                              |
-|--------------|-----------------------|-----------------------------------|
+|              | 客户端                | 集合                        |
+|--------------|-----------------------|----------------------------|
 | Python | [客户端](./python/client) | [集合](./python/collection) |
-| JavaScript | [客户端](./js/client) | [集合](./js/collection)  |
+| JavaScript | [客户端](./js/client) | [集合](./js/collection) |
 
 ***
 
