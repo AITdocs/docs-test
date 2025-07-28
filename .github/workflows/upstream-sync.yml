@@ -30,7 +30,7 @@ jobs:
       - name: Merge main to aitdocs
         run: |
           git checkout aitdocs || git checkout -b aitdocs
-          git merge main --allow-unrelated-histories -m "Merge main to aitdocs [run-translation-deploy-ci]"
+          git merge main -m "Merge main to aitdocs [run-translation-deploy-ci]"
 
       - name: Push aitdocs branch
         run: |
