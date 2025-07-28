@@ -13,7 +13,7 @@ jobs:
       - uses: tgymnich/fork-sync@v2.0
         with:
           token: ${{ secrets.FORK_SYNC_TOKEN }}
-          base: base-main
+          base: main
           head: main
 
       - name: Checkout repo
