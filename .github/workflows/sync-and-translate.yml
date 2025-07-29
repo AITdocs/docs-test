@@ -9,18 +9,19 @@ jobs:
   sync-and-translate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.FORK_SYNC_TOKEN }}
-          fetch-depth: 0
-
       - name: Sync Fork
         uses: tgymnich/fork-sync@v2.0
         with:
           token: ${{ secrets.FORK_SYNC_TOKEN }}
           base: main
           head: main
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.FORK_SYNC_TOKEN }}
+          fetch-depth: 0
+          ref: main
 
       - name: Configure Git
         run: |
@@ -58,7 +59,7 @@ jobs:
           echo "DIR_PATH: ${DIR_PATH}"
           cd ~/aitdocs
           uv run main.py -d $DIR_PATH --incremental --auto-commit --auto-push
-          
+
       - name: Handle errors
         if: failure()
         run: |
