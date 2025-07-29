@@ -33,10 +33,10 @@ def add(ids: OneOrMany[ID],
 
 **参数**:
 
-- `ids` - 你希望添加的嵌入向量的 ID
-- `embeddings` - 要添加的嵌入向量。如果为 None，则将根据 documents 使用 Collection 中设置的 embedding_function 来计算嵌入向量。可选。
-- `metadatas` - 与嵌入向量关联的元数据。在查询时，你可以根据此元数据进行过滤。可选。
-- `documents` - 与嵌入向量关联的文档。可选。
+- `ids` - 你希望添加的嵌入向量的ID
+- `embeddings` - 要添加的嵌入向量。如果为None，则将根据documents使用为集合设置的embedding_function来计算嵌入向量。可选。
+- `metadatas` - 与嵌入向量相关联的元数据。在查询时，可以基于此元数据进行过滤。可选。
+- `documents` - 与嵌入向量相关联的文档。可选。
 
 **返回值**:
 
@@ -44,7 +44,7 @@ def add(ids: OneOrMany[ID],
 
 **异常**:
 
-- `ValueError` - 如果你没有提供 embeddings 或 documents
-- `ValueError` - 如果 ids、embeddings、metadatas 或 documents 的长度不一致
-- `ValueError` - 如果你没有提供嵌入函数且没有提供 embeddings
-- `DuplicateIDError` - 如果你提供的 ID 已经存在
+- `ValueError` - 如果你未提供嵌入向量或文档
+- `ValueError` - 如果ids、embeddings、metadatas或documents的长度不一致
+- `ValueError` - 如果未提供嵌入函数且未提供嵌入向量
+- `DuplicateIDError` - 如果提供的ID已存在
