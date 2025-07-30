@@ -60,6 +60,14 @@ jobs:
           cd ~/aitdocs
           uv run main.py -d $DIR_PATH --incremental --auto-commit --auto-push
 
+      - name: Checkout code to aitdocs-deploy branch
+        run: |
+          git fetch origin
+          git checkout main
+          git branch -D aitdocs-deploy 2>/dev/null || true
+          git checkout -b aitdocs-deploy
+          git push origin aitdocs-deploy --force
+
       - name: Handle errors
         if: failure()
         run: |
