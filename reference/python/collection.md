@@ -1,8 +1,8 @@
 ---
-title: Collection
+title: 集合
 ---
 
-# Python Collection
+# Python 集合
 
 ```python
 class Collection(BaseModel)
@@ -14,11 +14,11 @@ class Collection(BaseModel)
 def count() -> int
 ```
 
-The total number of embeddings added to the database
+添加到数据库中的嵌入向量总数
 
-**Returns**:
+**返回值**:
 
-- `int` - The total number of embeddings added to the database
+- `int` - 添加到数据库中的嵌入向量总数
 
 ## add
 
@@ -29,24 +29,22 @@ def add(ids: OneOrMany[ID],
         documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
-Add embeddings to the data store.
+向数据存储中添加嵌入向量。
 
-**Arguments**:
+**参数**:
 
-- `ids` - The ids of the embeddings you wish to add
-- `embeddings` - The embeddings to add. If None, embeddings will be computed based on the documents using the embedding_function set for the Collection. Optional.
-- `metadatas` - The metadata to associate with the embeddings. When querying, you can filter on this metadata. Optional.
-- `documents` - The documents to associate with the embeddings. Optional.
+- `ids` - 你希望添加的嵌入向量的ID
+- `embeddings` - 要添加的嵌入向量。如果为None，则将根据documents使用为集合设置的embedding_function来计算嵌入向量。可选。
+- `metadatas` - 与嵌入向量相关联的元数据。在查询时，可以基于此元数据进行过滤。可选。
+- `documents` - 与嵌入向量相关联的文档。可选。
 
-
-**Returns**:
+**返回值**:
 
   None
 
+**异常**:
 
-**Raises**:
-
-- `ValueError` - If you don't provide either embeddings or documents
-- `ValueError` - If the length of ids, embeddings, metadatas, or documents don't match
-- `ValueError` - If you don't provide an embedding function and don't provide embeddings
-- `DuplicateIDError` - If you provide an id that already exists
+- `ValueError` - 如果你未提供嵌入向量或文档
+- `ValueError` - 如果ids、embeddings、metadatas或documents的长度不一致
+- `ValueError` - 如果未提供嵌入函数且未提供嵌入向量
+- `DuplicateIDError` - 如果提供的ID已存在

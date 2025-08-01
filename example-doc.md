@@ -1,11 +1,11 @@
 ---
-title: Collection
+title: 集合
 ---
 
-# Python Collections 
+# Python 集合（Collections）
 
 
-> Now the other princes of the Achaeans slept soundly the whole night through, but Agamemnon son of Atreus was troubled, so that he could get no rest. As when fair Hera's lord flashes his lightning in token of great rain or hail or snow when the snow-flakes whiten the ground, or again as a sign that he will open the wide jaws of hungry war, even so did Agamemnon heave many a heavy sigh, for his soul trembled within him. When he looked upon the plain of Troy he marveled at the many watchfires burning in front of Ilion... - The Iliad, Scroll 10
+> 现在其他阿开奥斯王子们都整夜安然酣睡，唯有阿特柔斯之子阿伽门农心绪烦乱，辗转难眠。就像赫拉的丈夫宙斯闪烁雷霆，预示着滂沱大雨、冰雹或雪花使大地一片银白，又或作为张开饥饿战争巨口的征兆，阿伽门农也一次次沉重地叹息，他的灵魂在胸中震颤不安。当他望向特洛伊平原时，看到伊里翁城前燃着无数的守望篝火，不禁心生惊叹…… ——《伊利亚特》第十卷
 
 20250730 11:13
 
@@ -20,11 +20,11 @@ class Collection(BaseModel)
 def count() -> int
 ```
 
-The total number of embeddings added to the database
+添加到数据库中的嵌入向量总数。
 
-**Returns**:
+**返回**:
 
-- `int` - The total number of embeddings added to the database
+- `int` - 添加到数据库中的嵌入向量总数。
 
 ## get
 
@@ -38,19 +38,17 @@ def get(ids: Optional[OneOrMany[ID]] = None,
         include: Include = ["metadatas", "documents"]) -> GetResult
 ```
 
-Get embeddings and their associate data from the data store. If no ids or where filter is provided returns
-all embeddings up to limit starting at offset.
+从数据存储中获取嵌入向量及其关联数据。如果没有提供 ids 或 where 过滤条件，则返回从 offset 开始最多 limit 个嵌入向量。
 
-**Arguments**:
+**参数**:
 
-- `ids` - The ids of the embeddings to get. Optional.
-- `where` - A Where type dict used to filter results by. E.g. `{$and: [{"color" : "red"}, {"price": 4.20}]}`. Optional.
-- `limit` - The number of documents to return. Optional.
-- `offset` - The offset to start returning results from. Useful for paging results with limit. Optional.
-- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{"$contains" : "hello"}`. Optional.
-- `include` - A list of what to include in the results. Can contain `"embeddings"`, `"metadatas"`, `"documents"`. Ids are always included. Defaults to `["metadatas", "documents"]`. Optional.
+- `ids` - 要获取的嵌入向量的 ID。可选。
+- `where` - 用于过滤结果的 Where 类型字典。例如：`{$and: [{"color" : "red"}, {"price": 4.20}]}`。可选。
+- `limit` - 返回的文档数量。可选。
+- `offset` - 开始返回结果的偏移量。与 limit 一起用于分页。可选。
+- `where_document` - 用于根据文档内容进行过滤的 WhereDocument 类型字典。例如：`{"$contains" : "hello"}`。可选。
+- `include` - 指定返回结果中包含的内容列表。可以包含 `"embeddings"`、`"metadatas"`、`"documents"`。ID 始终包含在内。默认值为 `["metadatas", "documents"]`。可选。
 
+**返回**:
 
-**Returns**:
-
-- `GetResult` - A GetResult object
+- `GetResult` - 一个 GetResult 对象
